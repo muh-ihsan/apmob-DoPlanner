@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "551558077225",
+    "project_id": "doplanner-f4565",
+    "storage_bucket": "doplanner-f4565.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:551558077225:android:8c4ba9284d0e46c944b538",
+        "android_client_info": {
+          "package_name": "com.tubesApmob.doplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "551558077225-udjhdm9gucbv1uoppj5ls92hr2f3e1qq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASsGqdS72Y0qA4dMg91ceO3IabdpnaBzg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "551558077225-udjhdm9gucbv1uoppj5ls92hr2f3e1qq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
