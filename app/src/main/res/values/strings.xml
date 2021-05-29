@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DoPlanner</string>
+    <string name="dpl_login">Login</string>
+    <string name="dpl_cancel">Cancel</string>
+    <string name="dpl_login_google">Login with Google</string>
+    <string name="dpl_login_email">Login with Email</string>
+    <string name="dpl_hint_email">Email</string>
+    <string name="dpl_hint_password">Password</string>
 </resources>
