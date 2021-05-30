@@ -2,13 +2,17 @@
     <string name="app_name">DoPlanner</string>
     <string name="dpl_login">Login</string>
     <string name="dpl_cancel">Batal</string>
+    <string name="dpl_submit">Submit</string>
     <string name="dpl_login_google">Login with Google</string>
     <string name="dpl_login_email">Login with Email</string>
     <string name="dpl_dosen">Dosen</string>
     <string name="dpl_mahasiswa">Mahasiswa</string>
     <string name="dpl_hint_email">Email</string>
     <string name="dpl_hint_password">Password</string>
+    <string name="dpl_hint_password_baru">Password Baru</string>
+    <string name="dpl_hint_password_ulang">Ulangi Password Baru</string>
     <string name="dpl_change_password">Ganti Password</string>
+    <string name="dpl_reset_password">Reset Password</string>
     <string name="dpl_instruksi_lupa_password">Masukkan email anda untuk mereset password.
         Ikuti langkah-langkah yang terdapat dalam email yang anda terima.</string>
 </resources>
