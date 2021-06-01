@@ -10,9 +10,14 @@
     <string name="dpl_hint_email">Email</string>
     <string name="dpl_hint_password">Password</string>
     <string name="dpl_hint_password_baru">Password Baru</string>
-    <string name="dpl_hint_password_ulang">Ulangi Password Baru</string>
+    <string name="dpl_hint_password_ulang">Konfirmasi Password</string>
+    <string name="dpl_register">Register</string>
+    <string name="dpl_signup">Sign Up</string>
+    <string name="dpl_lupa_password">Lupa password?</string>
     <string name="dpl_change_password">Ganti Password</string>
     <string name="dpl_reset_password">Reset Password</string>
     <string name="dpl_instruksi_lupa_password">Masukkan email anda untuk mereset password.
         Ikuti langkah-langkah yang terdapat dalam email yang anda terima.</string>
+    <string name="dpl_hint_nama">Nama</string>
+    <string name="dpl_hint_jurusan">Jurusan</string>
 </resources>
