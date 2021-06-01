@@ -45,7 +45,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@id/rgLogin"
+        app:layout_constraintBottom_toTopOf="@id/bt_submit_email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="4dp">
@@ -69,38 +69,26 @@
         android:paddingVertical="12dp"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_forgot_pass"
+        android:id="@+id/bt_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lupa password?"
+        android:text="@string/dpl_register"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="40dp"
         android:layout_marginBottom="32dp"/>
 
-    <RadioGroup
-        android:id="@+id/rgLogin"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_forgot_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/bt_submit_email"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/dpl_lupa_password"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal"
-        android:layout_marginBottom="8dp">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="32dp"
-            android:text="@string/dpl_dosen" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:text="@string/dpl_mahasiswa" />
-    </RadioGroup>
-
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
