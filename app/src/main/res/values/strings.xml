@@ -20,4 +20,7 @@
         Ikuti langkah-langkah yang terdapat dalam email yang anda terima.</string>
     <string name="dpl_hint_nama">Nama</string>
     <string name="dpl_hint_jurusan">Jurusan</string>
+    <string name="dpl_jadwal">Jadwal</string>
+    <string name="dpl_tugas">Tugas</string>
+    <string name="dpl_daftar_mahasiswa">Daftar Mahasiswa</string>
 </resources>

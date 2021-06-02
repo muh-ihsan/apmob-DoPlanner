@@ -6,14 +6,14 @@ import android.os.Bundle
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dpl_login)
+        setContentView(R.layout.activity_main)
 
-        val fragmentLogin = LoginFragment() // Deklarasi fragment login
+        /* val fragmentLogin = LoginFragment() // Deklarasi fragment login
 
         // Menampilkan fragment login email
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_login_flow, fragmentLogin)
             commit()
-        }
+        } */
     }
 }

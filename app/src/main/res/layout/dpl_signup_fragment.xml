@@ -65,7 +65,7 @@
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -74,7 +74,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom=""
         app:startIconDrawable="@drawable/ic_lock_24"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
@@ -95,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="24dpdp"
+        android:layout_marginBottom="24dp"
         app:startIconDrawable="@drawable/ic_lock_24"
         app:endIconMode="password_toggle"
         android:hint="@string/dpl_hint_password_ulang"
