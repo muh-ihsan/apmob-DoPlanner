@@ -23,4 +23,6 @@
     <string name="dpl_jadwal">Jadwal</string>
     <string name="dpl_tugas">Tugas</string>
     <string name="dpl_daftar_mahasiswa">Daftar Mahasiswa</string>
+    <string name="dpl_appbar_jadwal">Jadwal</string>
+    <string name="dpl_tambah_jadwal">Tambah Jadwal</string>
 </resources>

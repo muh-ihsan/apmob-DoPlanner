@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_jadwal_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:paddingVertical="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="Item Jadwal"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_more_vert_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_linkmedia_card"/>
+
+        <TextView
+            android:id="@+id/tv_media_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Microsoft Teams"
+            android:textSize="16sp"
+            android:layout_marginStart="@dimen/dpl_text_card_margin"
+            app:layout_constraintTop_toBottomOf="@id/tv_jadwal_card"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_linkmedia_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="http://microsoft.com"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/dpl_text_card_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_media_card" />
+
+        <TextView
+            android:id="@+id/tv_kelas_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Kelas"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_linkmedia_card"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/dpl_text_card_margin"
+            android:padding="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Jam"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/tv_kelas_card"
+            app:layout_constraintTop_toBottomOf="@id/tv_linkmedia_card"
+            android:padding="8dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
