@@ -25,22 +25,11 @@ class MainActivity : AppCompatActivity() {
             keActivityLogin()
         }
 
-        /* val fragmentLogin = LoginFragment() // Deklarasi fragment login
-
-        // Menampilkan fragment login email
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_login_flow, fragmentLogin)
-            commit()
-        } */
     }
 
-    public override fun onStart() {
-        super.onStart()
-
-    }
 
     // fungsi untuk memulai activity login
-    fun keActivityLogin() {
+    private fun keActivityLogin() {
         val intentLogin = Intent(this, LoginActivity::class.java)
         startActivity(intentLogin)
     }
