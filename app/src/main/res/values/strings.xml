@@ -23,4 +23,12 @@
     <string name="dpl_jadwal">Jadwal</string>
     <string name="dpl_tugas">Tugas</string>
     <string name="dpl_daftar_mahasiswa">Daftar Mahasiswa</string>
+    <string name="dpl_appbar_jadwal">Jadwal</string>
+    <string name="dpl_tambah_jadwal">Tambah Jadwal</string>
+    <string name="dpl_appbar_tugas">Tugas</string>
+    <string name="dpl_tambah_tugas">Tambah Tugas</string>
+    <string name="dpl_item_tugas_tanggal">Dibuat pada tanggal: 01/01/2000</string>
+    <string name="dpl_tambah_mahasiswa">Tambah Mahasiswa</string>
+    <string name="dpl_appbar_mahasiswa">Daftar Mahasiswa</string>
+    <string name="dpl_tv_kelas">Kelas</string>
 </resources>
