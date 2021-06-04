@@ -6,5 +6,5 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class LoginFragment : Fragment(R.layout.dpl_login_fragment) {
+class LoginFragment : Fragment() {
 }
