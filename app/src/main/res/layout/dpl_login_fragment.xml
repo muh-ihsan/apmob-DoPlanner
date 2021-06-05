@@ -11,20 +11,20 @@
         android:text="Login ke DoPlanner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ti_email"
+        app:layout_constraintBottom_toTopOf="@id/ti_loginfragment_email"
         android:layout_marginBottom="16dp"
         style="@style/TextAppearance.MaterialComponents.Headline6"
         android:textAlignment="center" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ti_email"
+        android:id="@+id/ti_loginfragment_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:hint="@string/dpl_hint_email"
         app:startIconDrawable="@drawable/ic_email_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintBottom_toTopOf="@id/ti_password"
+        app:layout_constraintBottom_toTopOf="@id/ti_loginfragment_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="8dp">
@@ -35,7 +35,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ti_password"
+        android:id="@+id/ti_loginfragment_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
@@ -45,7 +45,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@id/bt_submit_email"
+        app:layout_constraintBottom_toTopOf="@id/bt_loginfragment_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="4dp">
@@ -57,11 +57,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_submit_email"
+        android:id="@+id/bt_loginfragment_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dpl_login"
-        app:layout_constraintBottom_toTopOf="@id/bt_forgot_pass"
+        app:layout_constraintBottom_toTopOf="@id/bt_loginfragment_forgotpass"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingHorizontal="40dp"
@@ -69,7 +69,7 @@
         android:paddingVertical="12dp"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_register"
+        android:id="@+id/bt_loginfragment_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dpl_register"
@@ -80,7 +80,7 @@
         android:layout_marginBottom="32dp"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_forgot_pass"
+        android:id="@+id/bt_loginfragment_forgotpass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dpl_lupa_password"

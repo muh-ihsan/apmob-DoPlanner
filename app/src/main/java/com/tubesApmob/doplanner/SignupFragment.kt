@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.tubesApmob.doplanner.databinding.DplForgotPasswordFragmentBinding
+import com.tubesApmob.doplanner.databinding.DplSignupFragmentBinding
 
-class ForgotPasswordFragment : Fragment(R.layout.dpl_forgot_password_fragment) {
-    private var _binding: DplForgotPasswordFragmentBinding? = null
+class SignupFragment : Fragment() {
+    private var _binding: DplSignupFragmentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,10 +18,10 @@ class ForgotPasswordFragment : Fragment(R.layout.dpl_forgot_password_fragment) {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        _binding = DplForgotPasswordFragmentBinding.inflate(inflater, container, false)
+        _binding = DplSignupFragmentBinding.inflate(layoutInflater, container, false)
 
-        binding.btCancelForgotPass.setOnClickListener {
-            requireView().findNavController().navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
+        binding.btCancelSignup.setOnClickListener {
+            requireView().findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
         }
 
         return binding.root
