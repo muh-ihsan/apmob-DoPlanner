@@ -27,8 +27,22 @@
     <string name="dpl_tambah_jadwal">Tambah Jadwal</string>
     <string name="dpl_appbar_tugas">Tugas</string>
     <string name="dpl_tambah_tugas">Tambah Tugas</string>
-    <string name="dpl_item_tugas_tanggal">Dibuat pada tanggal: 01/01/2000</string>
+    <string name="dpl_item_tugas_deadline">Deadline: 01/01/2000</string>
     <string name="dpl_tambah_mahasiswa">Tambah Mahasiswa</string>
     <string name="dpl_appbar_mahasiswa">Daftar Mahasiswa</string>
     <string name="dpl_tv_kelas">Kelas</string>
+    <string name="dpl_menu_utama">Menu Utama</string>
+    <string name="dpl_akun">Akun</string>
+    <string name="dpl_pengaturan">Pengaturan</string>
+    <string name="dpl_log_out">Log Out</string>
+    <string name="dpl_edit_akun">Edit Akun</string>
+    <string name="dpl_matkul">Mata Kuliah</string>
+    <string name="dpl_media_pembelajaran">Media Belajar</string>
+    <string name="dpl_link_belajar">Link Belajar</string>
+    <string name="dpl_nama_tugas">Nama Tugas</string>
+    <string name="dpl_tanggal">Tanggal</string>
+    <string name="dpl_jam">Jam</string>
+    <string name="dpl_detail_tugas">Detail Tugas</string>
+    <string name="dpl_nama">Nama</string>
+    <string name="dpl_nim">NIM</string>
 </resources>

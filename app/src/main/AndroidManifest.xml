@@ -19,6 +19,10 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".JadwalActivity" />
+        <activity android:name=".TugasActivity" />
+        <activity android:name=".DaftarMahasiswaActivity" />
+        <activity android:name=".TambahJadwalActivity" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

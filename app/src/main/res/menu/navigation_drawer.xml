@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/grup_utama_navdrawer"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_home_navdrawer"
+            android:icon="@drawable/ic_home_24"
+            android:title="@string/dpl_menu_utama"
+            android:checked="true" />
+        <item
+            android:id="@+id/item_jadwal_navdrawer"
+            android:icon="@drawable/ic_calendar_24"
+            android:title="@string/dpl_jadwal" />
+        <item
+            android:id="@+id/item_tugas_navdrawer"
+            android:icon="@drawable/ic_assignment_24"
+            android:title="@string/dpl_tugas" />
+        <item
+            android:id="@+id/item_mahasiswa_navdrawer"
+            android:icon="@drawable/ic_people_24"
+            android:title="@string/dpl_daftar_mahasiswa" />
+    </group>
+
+    <group
+        android:id="@+id/grup_akun_navdrawer">
+        <item
+            android:id="@+id/subtitle_akun_navdrawer"
+            android:title="@string/dpl_akun">
+            <menu>
+                <item
+                    android:id="@+id/item_aturAkun_navdrawer"
+                    android:icon="@drawable/ic_edit_24"
+                    android:title="@string/dpl_edit_akun" />
+                <item
+                    android:id="@+id/item_logout_navdrawer"
+                    android:icon="@drawable/ic_exit_24"
+                    android:title="@string/dpl_log_out" />
+            </menu>
+        </item>
+    </group>
+</menu>

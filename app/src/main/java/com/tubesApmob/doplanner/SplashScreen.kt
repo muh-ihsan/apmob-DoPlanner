@@ -30,13 +30,15 @@ class SplashScreen : AppCompatActivity() {
 
         // Method ini untuk splash screen agar menetap lebih lama
         Handler(Looper.getMainLooper()).postDelayed({
-            if (userSaatIni != null) { // Jika user sudah login
+            /*if (userSaatIni != null) { // Jika user sudah login
                 startActivity(intentMainActivity) // Mulai menu utama
                 finish() // Hentikan activity splash screen
             } else { // Jika user belum login
                 startActivity(intentLoginActivity) // Mulai activity login
                 finish() // Hentikan activity splash screen
-            }
+            }*/
+            startActivity(intentMainActivity)
+            finish()
         }, 3000) // delay dalam milliseconds
         Timber.i("Splash screen onCreate dipanggil")
     }

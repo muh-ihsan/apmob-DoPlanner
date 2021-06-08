@@ -1,49 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_tugas"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/topAppBar_tugas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:fitsSystemWindows="true"
+            style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface">
 
             <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar_tugas"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:title="@string/dpl_appbar_tugas"
                 app:navigationIcon="@drawable/ic_menu_24"
-                style="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary" />
+                style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/topAppBar_tugas"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="@dimen/topAppBar_margin">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/dpl_tugas_item">
 
         </androidx.recyclerview.widget.RecyclerView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_tambah_mahasiswa"
-        android:contentDescription="@string/dpl_tambah_tugas"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_tambah_mahasiswa"
+            android:contentDescription="@string/dpl_tambah_tugas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/ic_add_24"
+            android:focusable="true" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/dpl_navigation_view_tugas"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_add_24" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/dpl_header_navigation_drawer"
+        app:menu="@menu/navigation_drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
