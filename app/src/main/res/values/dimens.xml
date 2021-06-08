@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="topAppBar_margin">56dp</dimen>
-    <dimen name="dpl_text_card_margin">8dp</dimen>
+    <dimen name="dpl_text_card_margin">16dp</dimen>
+    <dimen name="dpl_margin_textedit_activity">24dp</dimen>
 </resources>
