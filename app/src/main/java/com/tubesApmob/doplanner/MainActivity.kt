@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -17,12 +18,15 @@ import javax.annotation.meta.When
 
 class MainActivity : ActivityIntent(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.dplNavigationView.setCheckedItem(R.id.item_home_navdrawer)
         binding.dplNavigationView.setNavigationItemSelectedListener(this)
+        auth = Firebase.auth
+        val user = auth.currentUser
 
         // Untuk menu NavDrawer
         binding.topAppBarMain.setOnClickListener {
@@ -55,6 +59,11 @@ class MainActivity : ActivityIntent(), NavigationView.OnNavigationItemSelectedLi
             R.id.item_jadwal_navdrawer -> keActivityJadwal(this)
             R.id.item_tugas_navdrawer -> keActivityTugas(this)
             R.id.item_mahasiswa_navdrawer -> keActivityMahasiswa(this)
+            R.id.item_logout_navdrawer -> {
+                auth.signOut()
+                keActivityLogin(this)
+                finish()
+            }
         }
         binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
         return true

@@ -2,13 +2,38 @@ package com.tubesApmob.doplanner
 
 import android.content.Context
 import android.content.Intent
+import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 
 open class ActivityIntent : AppCompatActivity() {
-    //fungsi untuk memulai activity menu utama
+    // fungsi untuk memulai activity menu utama
     fun keActivityMain(packageContext: Context) {
         val intentMain = Intent(packageContext, MainActivity::class.java)
         startActivity(intentMain)
+    }
+
+    // fungsi untuk memulai activity login
+    fun keActivityLogin(packageContext: Context) {
+        val intentLogin = Intent(packageContext, LoginActivity::class.java)
+        startActivity(intentLogin)
+    }
+
+    // fungsi untuk memulai activity signup
+    fun keActivitySignup(packageContext: Context) {
+        val intentSignup = Intent(packageContext, SignupActivity::class.java)
+        startActivity(intentSignup)
+    }
+
+    // fungsi untuk memulai activity lupa password
+    fun keActivityLupaPass(packageContext: Context) {
+        val intentForgot = Intent(packageContext, ForgotPasswordActivity::class.java)
+        startActivity(intentForgot)
+    }
+
+    // fungsi untuk memulai activity setup pertama
+    fun keActivityFirstSetup(packageContext: Context) {
+        val intentSetup = Intent(packageContext, FirstSetupActivity::class.java)
+        startActivity(intentSetup)
     }
 
     // fungsi untuk memulai activity jadwal
