@@ -11,7 +11,7 @@ import com.google.firebase.ktx.Firebase
 import com.tubesApmob.doplanner.databinding.DplSplashBinding
 import timber.log.Timber
 
-class SplashScreen : AppCompatActivity() {
+class SplashScreen : ActivityIntent() {
     private lateinit var binding : DplSplashBinding
     private lateinit var auth : FirebaseAuth
 
@@ -23,23 +23,18 @@ class SplashScreen : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        val intentMainActivity = Intent(this, MainActivity::class.java)
-        val intentLoginActivity = Intent(this, LoginActivity::class.java)
-
         val userSaatIni = auth.currentUser
 
         // Method ini untuk splash screen agar menetap lebih lama
         Handler(Looper.getMainLooper()).postDelayed({
-            /*if (userSaatIni != null) { // Jika user sudah login
-                startActivity(intentMainActivity) // Mulai menu utama
+            if (userSaatIni != null) { // Jika user sudah login
+                keActivityMain(this)
                 finish() // Hentikan activity splash screen
             } else { // Jika user belum login
-                startActivity(intentLoginActivity) // Mulai activity login
+                keActivityLogin(this) // Mulai activity login
                 finish() // Hentikan activity splash screen
-            }*/
-            startActivity(intentMainActivity)
-            finish()
-        }, 3000) // delay dalam milliseconds
+            }
+        }, 2500) // delay dalam milliseconds
         Timber.i("Splash screen onCreate dipanggil")
     }
 }
