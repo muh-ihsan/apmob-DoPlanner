@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.tubesApmob.doplanner.databinding.DplTambahJadwalBinding
 
 
-class TambahJadwalActivity : ActivityIntent() {
+class TambahJadwalActivity : BaseActivity() {
     private lateinit var binding: DplTambahJadwalBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -5,8 +5,7 @@
     android:id="@+id/drawer_layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    tools:openDrawer="start">
+    tools:context=".MainActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -49,25 +48,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="48dp"
-                android:layout_marginBottom="16dp"
                 android:paddingVertical="24dp"
                 android:text="@string/dpl_jadwal"
                 android:textSize="18sp"
                 app:icon="@drawable/ic_calendar_24"
-                app:layout_constraintBottom_toTopOf="@+id/bt_tugas_main"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/bt_tugas_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="48dp"
-                android:paddingVertical="24dp"
-                android:text="@string/dpl_tugas"
-                android:textSize="18sp"
-                app:icon="@drawable/ic_assignment_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -75,19 +59,20 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/bt_mahasiswa_main"
+                android:id="@+id/bt_tugas_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="48dp"
                 android:layout_marginTop="16dp"
                 android:paddingVertical="24dp"
-                android:text="@string/dpl_daftar_mahasiswa"
+                android:text="@string/dpl_tugas"
                 android:textSize="18sp"
-                app:icon="@drawable/ic_people_24"
+                app:icon="@drawable/ic_assignment_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bt_tugas_main" />
+                app:layout_constraintTop_toBottomOf="@+id/bt_jadwal_main" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

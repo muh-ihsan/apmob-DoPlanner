@@ -1,12 +1,7 @@
 package com.tubesApmob.doplanner
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -16,7 +11,7 @@ import com.google.firebase.ktx.Firebase
 import com.tubesApmob.doplanner.databinding.DplSignupBinding
 import timber.log.Timber
 
-class SignupActivity : ActivityIntent() {
+class SignupActivity : BaseActivity() {
     private lateinit var binding: DplSignupBinding
     private lateinit var layoutSignup: ConstraintLayout
     private lateinit var auth: FirebaseAuth

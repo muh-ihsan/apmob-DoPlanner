@@ -21,6 +21,7 @@
                 android:id="@+id/topAppBar_tugas"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:elevation="0dp"
                 app:title="@string/dpl_appbar_tugas"
                 app:navigationIcon="@drawable/ic_menu_24"
                 style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface" />

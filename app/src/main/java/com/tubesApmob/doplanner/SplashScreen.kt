@@ -1,17 +1,15 @@
 package com.tubesApmob.doplanner
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.tubesApmob.doplanner.databinding.DplSplashBinding
 import timber.log.Timber
 
-class SplashScreen : ActivityIntent() {
+class SplashScreen : BaseActivity() {
     private lateinit var binding : DplSplashBinding
     private lateinit var auth : FirebaseAuth
 
