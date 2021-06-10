@@ -35,9 +35,9 @@
         <activity
             android:name=".TugasActivity" />
         <activity
-            android:name=".DaftarMahasiswaActivity" />
-        <activity
             android:name=".TambahJadwalActivity" />
+        <activity android:name=".AturAkunActivity" />
+        <activity android:name=".ResetPassActivity" />
     </application>
 
 </manifest>

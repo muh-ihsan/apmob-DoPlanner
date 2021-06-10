@@ -3,7 +3,7 @@ package com.tubesApmob.doplanner
 import android.os.Bundle
 import com.tubesApmob.doplanner.databinding.DplTambahTugasBinding
 
-class TambahTugasActivity : ActivityIntent() {
+class TambahTugasActivity : BaseActivity() {
     private lateinit var binding: DplTambahTugasBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

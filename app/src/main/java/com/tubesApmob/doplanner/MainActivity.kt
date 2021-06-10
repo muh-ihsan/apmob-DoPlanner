@@ -1,32 +1,29 @@
 package com.tubesApmob.doplanner
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.widget.TextView
 import androidx.core.view.GravityCompat
-import androidx.core.view.get
-import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tubesApmob.doplanner.databinding.ActivityMainBinding
-import javax.annotation.meta.When
+import timber.log.Timber
 
-class MainActivity : ActivityIntent(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        binding.dplNavigationView.setCheckedItem(R.id.item_home_navdrawer)
         binding.dplNavigationView.setNavigationItemSelectedListener(this)
         auth = Firebase.auth
-        val user = auth.currentUser
+        db = Firebase.firestore
 
         // Untuk menu NavDrawer
         binding.topAppBarMain.setOnClickListener {
@@ -43,13 +40,18 @@ class MainActivity : ActivityIntent(), NavigationView.OnNavigationItemSelectedLi
             keActivityTugas(this)
         }
 
-        // Untuk tombol daftar mahasiswa
-        binding.btMahasiswaMain.setOnClickListener {
-            keActivityMahasiswa(this)
-        }
-
-
         setContentView(binding.root)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val headerView = binding.dplNavigationView.getHeaderView(0)
+        val headerName: TextView = headerView.findViewById(R.id.tv_nama_navdrawer)
+        val headerEmail: TextView = headerView.findViewById(R.id.tv_email_navdraw)
+
+        setHeaderDrawerNavigation(headerName, headerEmail, db, auth)
+        binding.dplNavigationView.setCheckedItem(R.id.item_home_navdrawer)
     }
 
     // untuk navigasi menu yang ada di navdrawer
@@ -58,7 +60,7 @@ class MainActivity : ActivityIntent(), NavigationView.OnNavigationItemSelectedLi
             R.id.item_home_navdrawer -> binding.drawerLayoutMain.close()
             R.id.item_jadwal_navdrawer -> keActivityJadwal(this)
             R.id.item_tugas_navdrawer -> keActivityTugas(this)
-            R.id.item_mahasiswa_navdrawer -> keActivityMahasiswa(this)
+            R.id.item_aturAkun_navdrawer -> keActivityAturAkun(this)
             R.id.item_logout_navdrawer -> {
                 auth.signOut()
                 keActivityLogin(this)

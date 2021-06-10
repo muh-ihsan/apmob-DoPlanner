@@ -2,10 +2,14 @@ package com.tubesApmob.doplanner
 
 import android.content.Context
 import android.content.Intent
-import androidx.annotation.Nullable
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import timber.log.Timber
 
-open class ActivityIntent : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity() {
+
     // fungsi untuk memulai activity menu utama
     fun keActivityMain(packageContext: Context) {
         val intentMain = Intent(packageContext, MainActivity::class.java)
@@ -48,12 +52,6 @@ open class ActivityIntent : AppCompatActivity() {
         startActivity(intentTugas)
     }
 
-    // fungsi untuk memulai activity daftar mahasiswa
-    fun keActivityMahasiswa(packageContext: Context) {
-        val intentMahasiswa = Intent(packageContext, DaftarMahasiswaActivity::class.java)
-        startActivity(intentMahasiswa)
-    }
-
     // fungsi untuk memulai activity tambah jadwal
     fun keActivityTambahJadwal(packageContext: Context) {
         val intentTambahJadwal = Intent(packageContext, TambahJadwalActivity::class.java)
@@ -76,5 +74,32 @@ open class ActivityIntent : AppCompatActivity() {
     fun keActivityDetailTugas(packageContext: Context) {
         val intentDetailTugas = Intent(packageContext, DetailTugasActivity::class.java)
         startActivity(intentDetailTugas)
+    }
+
+    // fungsi untuk memulai activity pengaturan akun
+    fun keActivityAturAkun(packageContext: Context) {
+        val intentAturAKun = Intent(packageContext, AturAkunActivity::class.java)
+        startActivity(intentAturAKun)
+    }
+
+    // fungsi untuk memulai activity reset password
+    fun keResetPassword(packageContext: Context) {
+        val intentResetPass = Intent(packageContext, ResetPassActivity::class.java)
+        startActivity(intentResetPass)
+    }
+
+    // Untuk set header drawer navigaiton
+    fun setHeaderDrawerNavigation(tvNama: TextView, tvEmail: TextView, db: FirebaseFirestore,
+                                  auth: FirebaseAuth) {
+        db.collection("users").document(auth.currentUser!!.uid).get()
+            .addOnSuccessListener {
+                var nama = it.get("nama")
+                var email = it.get("email")
+                Timber.d("Nama: $nama, email: $email")
+                tvNama.text = nama.toString()
+                tvEmail.text = email.toString()
+            } .addOnFailureListener { e ->
+                Timber.w(e, "Set header gagal dengan ")
+            }
     }
 }

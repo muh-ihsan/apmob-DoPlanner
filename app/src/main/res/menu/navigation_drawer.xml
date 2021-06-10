@@ -16,10 +16,6 @@
             android:id="@+id/item_tugas_navdrawer"
             android:icon="@drawable/ic_assignment_24"
             android:title="@string/dpl_tugas" />
-        <item
-            android:id="@+id/item_mahasiswa_navdrawer"
-            android:icon="@drawable/ic_people_24"
-            android:title="@string/dpl_daftar_mahasiswa" />
     </group>
 
     <group

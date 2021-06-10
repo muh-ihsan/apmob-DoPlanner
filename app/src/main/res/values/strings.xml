@@ -48,4 +48,6 @@
     <string name="dpl_signup_success_description">Sign up sukses. Silahkan lihat email untuk verifikasi</string>
     <string name="dpl_one_more">Sedikit lagi!</string>
     <string name="dpl_setup_description">Setup ini hanya dijalankan satu kali sesudah login pertama. Silahkan isi untuk lanjut.</string>
+    <string name="dpl_hint_password_lama">Password Lama</string>
+    <string name="dpl_hint_password_ulang_baru">Konfirmasi Password Baru</string>
 </resources>

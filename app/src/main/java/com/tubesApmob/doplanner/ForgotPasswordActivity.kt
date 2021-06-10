@@ -2,15 +2,13 @@ package com.tubesApmob.doplanner
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.tubesApmob.doplanner.databinding.DplForgotPasswordBinding
 import timber.log.Timber
 
-class ForgotPasswordActivity : ActivityIntent() {
+class ForgotPasswordActivity : BaseActivity() {
     private lateinit var binding: DplForgotPasswordBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
