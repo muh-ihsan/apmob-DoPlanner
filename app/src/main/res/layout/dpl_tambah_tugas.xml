@@ -21,25 +21,69 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_tambah_tugas"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ti_judul_tugas"
+            android:id="@+id/ti_nama_tugas"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dpl_margin_textedit_activity"
             android:layout_marginTop="48dp"
             android:hint="@string/dpl_nama_tugas"
+            app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_nama_tugas"
+                android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_matkul_tugas"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dpl_margin_textedit_activity"
+            android:hint="@string/dpl_matkul"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_nama_tugas">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_matkul_tugas"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_tanggal_tugas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dpl_tv_tanggal_deadline"
+            android:textSize="16sp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/ti_matkul_tugas"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ImageButton
+            android:id="@+id/bt_tanggal_jadwal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_event_24"
+            android:layout_marginStart="12dp"
+            app:layout_constraintTop_toBottomOf="@id/ti_matkul_tugas"
+            app:layout_constraintStart_toEndOf="@id/tv_tanggal_tugas" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/menu_kelas_tugas"
@@ -54,45 +98,46 @@
             app:layout_constraintTop_toBottomOf="@id/tv_tanggal_tugas">
 
             <AutoCompleteTextView
+                android:id="@+id/input_kelas_tugas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tv_tanggal_tugas"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_deskripsi_tugas"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="01/01/2000"
-            android:textSize="16sp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="@dimen/dpl_margin_textedit_activity"
-            app:layout_constraintTop_toBottomOf="@id/ti_judul_tugas"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginHorizontal="@dimen/dpl_margin_textedit_activity"
+            android:layout_marginTop="16dp"
+            android:hint="@string/dpl_tugas_description"
+            app:helperTextEnabled="true"
+            app:helperText="@string/dpl_optional"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menu_kelas_tugas">
 
-
-        <ImageButton
-            android:id="@+id/bt_tanggal_jadwal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_event_24"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="12dp"
-            app:layout_constraintTop_toBottomOf="@id/ti_judul_tugas"
-            app:layout_constraintStart_toEndOf="@id/tv_tanggal_tugas" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_deskripsi_tugas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:lines="2" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_tambah_tugas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:paddingHorizontal="24dp"
             android:paddingVertical="8dp"
-            android:textSize="16sp"
             android:text="@string/dpl_tambah_tugas"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/menu_kelas_tugas" />
+            app:layout_constraintTop_toBottomOf="@+id/ti_deskripsi_tugas" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

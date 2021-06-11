@@ -37,6 +37,10 @@ class TugasActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedLis
             binding.drawerLayoutTugas.open()
         }
 
+        binding.fabTambahTugas.setOnClickListener {
+            keActivityTambahTugas(this)
+        }
+
         setContentView(binding.root)
     }
 

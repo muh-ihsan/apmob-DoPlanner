@@ -36,6 +36,7 @@
             android:name=".TugasActivity" />
         <activity
             android:name=".TambahJadwalActivity" />
+        <activity android:name=".TambahTugasActivity" />
         <activity android:name=".AturAkunActivity" />
         <activity android:name=".ResetPassActivity" />
     </application>

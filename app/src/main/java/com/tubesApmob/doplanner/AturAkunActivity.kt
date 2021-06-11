@@ -42,6 +42,8 @@ class AturAkunActivity : BaseActivity() {
                 Timber.d("Ambil data profil sukses")
                 inputNama.setText(it.get("nama").toString())
                 inputEmail.setText(it.get("email").toString())
+                val defaultJurusan = it.get("jurusan").toString()
+                menuJurusan.setText(defaultJurusan, false)
             }.addOnFailureListener { e ->
                 Timber.w(e, "Ambil data profil gagal: ")
             }
