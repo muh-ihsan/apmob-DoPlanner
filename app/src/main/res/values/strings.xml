@@ -51,4 +51,7 @@
     <string name="dpl_hint_password_lama">Password Lama</string>
     <string name="dpl_hint_password_ulang_baru">Konfirmasi Password Baru</string>
     <string name="dpl_forbid_empty">Tidak boleh kosong</string>
+    <string name="dpl_tugas_description">Deskripsi Tugas</string>
+    <string name="dpl_optional">Opsional</string>
+    <string name="dpl_tv_tanggal_deadline">Tanggal Deadline</string>
 </resources>

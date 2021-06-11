@@ -51,6 +51,10 @@ class TambahJadwalActivity : BaseActivity() {
         val inputMedia = binding.inputMediaBelajarJadwal
         val inputLink = binding.inputLinkBelajarJadwal
 
+        binding.topAppBarTambahJadwal.setOnClickListener {
+            finish()
+        }
+
         binding.btJamJadwal.setOnClickListener {
             val cal = Calendar.getInstance()
             val pilihJam = MaterialTimePicker.Builder()
@@ -150,7 +154,8 @@ class TambahJadwalActivity : BaseActivity() {
                 return@setOnClickListener
             }
             if (kelas.isEmpty()) {
-                binding.menuKelasJadwal.error = getString(R.string.dpl_forbid_empty)
+                Snackbar.make(layoutParent, "Kelas tidak boleh kosong", Snackbar.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
             }
             if (tanggalText == getString(R.string.dpl_tanggal)) {
@@ -189,8 +194,8 @@ class TambahJadwalActivity : BaseActivity() {
                     finish()
                 } .addOnFailureListener { e ->
                     Timber.w(e, "Jadwal gagal dibuat dengan: ")
-                    Snackbar.make(layoutParent, "Jadwal gagal dibuat: " + e, Snackbar.LENGTH_LONG)
-                        .show()
+                    Snackbar.make(layoutParent, "Jadwal gagal dibuat: " + e.localizedMessage,
+                        Snackbar.LENGTH_LONG).show()
                 }
         }
 

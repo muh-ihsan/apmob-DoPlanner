@@ -52,7 +52,6 @@
             android:layout_marginHorizontal="@dimen/dpl_margin_textedit_activity"
             android:layout_marginTop="8dp"
             android:hint="@string/dpl_tv_kelas"
-            app:errorEnabled="true"
             app:helperText="Jika tidak ada, silahkan tambah"
             app:layout_constraintEnd_toStartOf="@+id/bt_tambah_kelas_jadwal"
             app:layout_constraintStart_toStartOf="parent"
@@ -146,7 +145,8 @@
             android:layout_marginHorizontal="@dimen/dpl_margin_textedit_activity"
             android:layout_marginTop="8dp"
             android:hint="@string/dpl_link_belajar"
-            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperText="@string/dpl_optional"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ti_media_belajar_jadwal">
