@@ -27,7 +27,7 @@
     <string name="dpl_tambah_jadwal">Tambah Jadwal</string>
     <string name="dpl_appbar_tugas">Tugas</string>
     <string name="dpl_tambah_tugas">Tambah Tugas</string>
-    <string name="dpl_item_tugas_deadline">Deadline: 01/01/2000</string>
+    <string name="dpl_item_tugas_deadline">Deadline:</string>
     <string name="dpl_tambah_mahasiswa">Tambah Mahasiswa</string>
     <string name="dpl_appbar_mahasiswa">Daftar Mahasiswa</string>
     <string name="dpl_tv_kelas">Kelas</string>
@@ -54,4 +54,6 @@
     <string name="dpl_tugas_description">Deskripsi Tugas</string>
     <string name="dpl_optional">Opsional</string>
     <string name="dpl_tv_tanggal_deadline">Tanggal Deadline</string>
+    <string name="dpl_edit_jadwal">Edit Jadwal</string>
+    <string name="dpl_edit_tugas">Edit Tugas</string>
 </resources>
