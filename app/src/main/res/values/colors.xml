@@ -10,4 +10,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="Biru_Primary">#4279E2</color>
+    <color name="Biru_Primary_Variant">#3C6AC3</color>
+    <color name="Hijau_Secondary">#4CAF50</color>
+    <color name="Hijau_Sceondary_Variant">#30984D</color>
 </resources>
