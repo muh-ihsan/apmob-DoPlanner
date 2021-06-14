@@ -15,6 +15,7 @@ import com.google.android.material.timepicker.TimeFormat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -96,30 +97,15 @@ class EditJadwalActivity : AppCompatActivity() {
             alert.setPositiveButton("Tambah") { dialog, i ->
                 val kelasAlert = inputKelasAlert.text.toString()
                 val kelasRef = db.collection("users").document(user!!.uid).collection("kelas")
-                val kelasMap = hashMapOf(
-                    "kelas" to kelasAlert
-                )
 
-                kelasRef.orderBy("kelas", Query.Direction.ASCENDING).get()
-                    .addOnSuccessListener { docs ->
-                        for (doc in docs) {
-                            val kelasSort = doc.get("kelas").toString()
-                            if (kelasSort == kelasAlert) {
-                                Timber.d("Tidak bisa menambah kelas, sudah terdaftar")
-                                Snackbar.make(layoutParent, "Tidak bisa menambah kelas, sudah terdaftar",
-                                    Snackbar.LENGTH_SHORT).show()
-                                break
-                            } else {
-                                kelasList.add(kelasAlert)
-                                inputKelas.setText(kelasAlert, false)
-                                kelasRef.add(kelasMap)
-                                    .addOnSuccessListener {
-                                        Timber.d("Sukses menambah kelas $kelasAlert ke Firebase dengan id: ${it.id}")
-                                    } .addOnFailureListener { e ->
-                                        Timber.w(e, "Gagal menambah kelas $kelasAlert: ")
-                                    }
-                                Timber.d("Kelas $kelasAlert ditambah ke menu")
-                            }
+                kelasRef.document(kelasAlert).get()
+                    .addOnSuccessListener {
+                        if (it.exists()) {
+                            Timber.d("Tidak bisa menambah kelas, sudah terdaftar")
+                            Snackbar.make(layoutParent, "Tidak bisa menambah kelas, sudah terdaftar",
+                                Snackbar.LENGTH_SHORT).show()
+                        } else {
+                            tambahKelasFirebase(kelasRef, kelasAlert)
                         }
                     }
             }
@@ -203,6 +189,27 @@ class EditJadwalActivity : AppCompatActivity() {
                         Snackbar.LENGTH_LONG).show()
                 }
         }
+    }
+
+    private fun tambahKelasFirebase(ref: CollectionReference, kelas: String) {
+        val kelasMap = hashMapOf(
+            "kelas" to kelas
+        )
+        ref.document(kelas).set(kelasMap)
+            .addOnSuccessListener {
+                Timber.d("Sukses menambah kelas $kelas ke Firebase")
+            } .addOnFailureListener { e ->
+                Timber.w(e, "Gagal menambah kelas $kelas: ")
+            }
+        Timber.d("Kelas $kelas ditambah ke menu")
+        ref.orderBy("kelas", Query.Direction.ASCENDING).get()
+            .addOnSuccessListener {
+                Timber.d("Sukses mengambil query kelas")
+                kelasList.add(kelas)
+                inputKelas.setText(kelas, false)
+            } .addOnFailureListener { e ->
+                Timber.w(e, "Gagal mengambil query kelas")
+            }
     }
 
     override fun onResume() {
