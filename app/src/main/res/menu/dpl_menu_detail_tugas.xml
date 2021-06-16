@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_hapus_tugas_detail"
+        android:icon="@drawable/ic_delete_24"
+        android:title="Hapus Tugas"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_edit_tugas_detail"
+        android:icon="@drawable/ic_edit_24"
+        android:title="@string/dpl_edit_tugas"
+        app:showAsAction="always" />
+</menu>
