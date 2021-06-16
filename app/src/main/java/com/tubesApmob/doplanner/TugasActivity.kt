@@ -70,7 +70,13 @@ class TugasActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedLis
                 holder.kelasText.text = model.kelas
                 val tugasID = snapshots.getSnapshot(position).id
 
-                holder.btHapus.setOnClickListener {
+                holder.itemView.setOnClickListener {
+                    val intentDetailTugas = Intent(this@TugasActivity, DetailTugasActivity::class.java)
+                        .putExtra("idTugasDetail", tugasID)
+                    startActivity(intentDetailTugas)
+                }
+
+                /*holder.btHapus.setOnClickListener {
                     Timber.d("Hapus di-tap pada ID:$tugasID dan bernama ${holder.matkulText.text}")
                     val hapusAlert = MaterialAlertDialogBuilder(this@TugasActivity)
                     hapusAlert.setMessage("Apakah anda yakin ingin menghapus tugas ini?")
@@ -95,7 +101,7 @@ class TugasActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedLis
                     val intentEditTugas = Intent(this@TugasActivity, EditTugasActivity::class.java)
                         .putExtra("idTugas", tugasID)
                     startActivity(intentEditTugas)
-                }
+                }*/
             }
 
         }

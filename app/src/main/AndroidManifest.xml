@@ -38,6 +38,7 @@
             android:name=".TambahJadwalActivity" />
         <activity android:name=".EditJadwalActivity" />
         <activity android:name=".TambahTugasActivity" />
+        <activity android:name=".DetailTugasActivity" />
         <activity android:name=".EditTugasActivity" />
         <activity android:name=".AturAkunActivity" />
         <activity android:name=".ResetPassActivity" />
