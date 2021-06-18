@@ -2,22 +2,44 @@ package com.tubesApmob.doplanner
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tubesApmob.doplanner.databinding.DplTugasDetailBinding
 import timber.log.Timber
+
+class MahasiswaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    val namaMahasiswa: TextView = itemView.findViewById(R.id.tv_list_nama_mahasiswa)
+    val nimMahasiswa: TextView = itemView.findViewById(R.id.tv_list_nim_mahasiswa)
+    val cekMahasiswa: MaterialCheckBox = itemView.findViewById(R.id.check_mahasiswa_list)
+    val btHapusMahasiswa: ImageButton = itemView.findViewById(R.id.bt_hapus_mahasiswa_list)
+    val btEditMahasiswa: ImageButton = itemView.findViewById(R.id.bt_edit_mahasiswa_list)
+}
 
 class DetailTugasActivity : BaseActivity() {
     private lateinit var binding: DplTugasDetailBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
     private lateinit var user: FirebaseUser
+    private lateinit var adapter: FirestoreRecyclerAdapter<DataMahasiswa, MahasiswaViewHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +56,13 @@ class DetailTugasActivity : BaseActivity() {
         val deadlineTugas = binding.tvTglDeadlineTugasDetail
         val idTugas = intent.getStringExtra("idTugasDetail")
         val tugasRef = db.collection("users").document(user.uid).collection("tugas")
+        val kelasRef = db.collection("users").document(user.uid).collection("kelas")
+        val mahasiswaCekRef = db.collection("users").document(user.uid).collection("tugas")
+            .document(idTugas!!).collection("mahasiswa")
         var deskripsiTugas: String = ""
+        var kelas: String = ""
 
-        tugasRef.document(idTugas!!).get().addOnSuccessListener {
+        tugasRef.document(idTugas).get().addOnSuccessListener {
             Timber.d("Sukses ambil data tugas")
             textTugas.text = it.get("nama").toString()
             textMatkul.text = it.get("matkul").toString()
@@ -46,6 +72,88 @@ class DetailTugasActivity : BaseActivity() {
         } .addOnFailureListener { e ->
             Timber.w(e, "Gagal ambil data tugas: ")
         }
+
+        kelas = textKelas.text.toString()
+        if (kelas.isEmpty()) {
+            Timber.d("Isi kelas kosong")
+        }
+
+        // Untuk sinkronisasi data mahasiswa tugas dengan data mahasiswa pada induk
+        binding.btSyncTugas.setOnClickListener {
+            db.collection("users").document(user.uid).collection("kelas").document(kelas)
+                .collection("mahasiswa").get().addOnSuccessListener { docs ->
+                    Timber.d("Sukses ambil data mahasiswa kelas")
+                    for (doc in docs) {
+                        Timber.d("Loop ke $doc dalam ambil data mahasiswa kelas")
+                        var namaMahasiswaKelas = doc.get("nama").toString()
+                        var nimMahasiswaKelas = doc.get("nim").toString()
+                        var dataMahaiswaKelas = hashMapOf(
+                            "nama" to namaMahasiswaKelas,
+                            "nim" to nimMahasiswaKelas,
+                        )
+
+                        mahasiswaCekRef.document(nimMahasiswaKelas).set(dataMahaiswaKelas, SetOptions.merge())
+                            .addOnSuccessListener {
+                                Timber.d("Sukses sinkron mahasiswa dengan NIM $nimMahasiswaKelas")
+                            } .addOnFailureListener { e ->
+                                Timber.w(e, "Gagal sinkron mahasiswa dengan NIM $nimMahasiswaKelas")
+                            }
+                    }
+                } .addOnFailureListener { e ->
+                    Timber.w(e, "Gagal ambil data kelas mahasiswa")
+                }
+        }
+
+        val queryMahasiswa = db.collection("users").document(user.uid).collection("tugas")
+            .document(idTugas).collection("mahasiswa").orderBy("nim", Query.Direction.ASCENDING)
+        val options = FirestoreRecyclerOptions.Builder<DataMahasiswa>().setQuery(queryMahasiswa, DataMahasiswa::class.java)
+            .setLifecycleOwner(this).build()
+        adapter = object: FirestoreRecyclerAdapter<DataMahasiswa, MahasiswaViewHolder>(options) {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MahasiswaViewHolder {
+                val view = LayoutInflater.from(this@DetailTugasActivity)
+                    .inflate(R.layout.dpl_daftar_mahasiswa_list, parent, false)
+                return MahasiswaViewHolder(view)
+            }
+
+            override fun onBindViewHolder(
+                holder: MahasiswaViewHolder,
+                position: Int,
+                model: DataMahasiswa
+            ) {
+                holder.namaMahasiswa.text = model.nama
+                holder.nimMahasiswa.text = model.nim
+                holder.cekMahasiswa.isChecked = model.cek
+                val idMahasiswa = snapshots.getSnapshot(position).id
+
+                holder.cekMahasiswa.setOnClickListener {
+                    if (holder.cekMahasiswa.isChecked) {
+                        val data = hashMapOf("cek" to true)
+                        mahasiswaCekRef.document(idMahasiswa).set(data, SetOptions.merge())
+                            .addOnSuccessListener {
+                                Timber.d("Mahasiswa dengan NIM $idMahasiswa diceklis")
+                            } .addOnFailureListener { e ->
+                                Timber.w(e, "Mahasiswa dengan NIM $idMahasiswa gagal diceklis")
+                            }
+                    } else {
+                        val data = hashMapOf("cek" to false)
+                        mahasiswaCekRef.document(idMahasiswa).set(data, SetOptions.merge())
+                            .addOnSuccessListener {
+                                Timber.d("Mahasiswa dengan NIM $idMahasiswa di unceklis")
+                            } .addOnFailureListener { e ->
+                                Timber.w(e, "Mahasiswa dengan NIM $idMahasiswa gagal di unceklis")
+                            }
+                    }
+                }
+
+                holder.btEditMahasiswa.setOnClickListener {
+                    
+                }
+            }
+
+        }
+
+        binding.recyclerViewTugasDetail.adapter = adapter
+        binding.recyclerViewTugasDetail.layoutManager = LinearLayoutManager(this)
 
         binding.topAppBarDetailTugas.setOnClickListener {
             finish()
@@ -62,6 +170,62 @@ class DetailTugasActivity : BaseActivity() {
             deskripsiDialog.setPositiveButton("OK", null)
             deskripsiDialog.show()
         }
+
+        binding.fabTambahMahasiswa.setOnClickListener {
+            val tambahMahasiswaDialog = MaterialAlertDialogBuilder(this)
+            val mahasiswaInflater = layoutInflater.inflate(R.layout.dpl_alert_mahasiswa, null)
+            val inputNamaMahasiswa = mahasiswaInflater.findViewById<TextInputEditText>(R.id.input_mahasiswa_alert)
+            val inputNimMahasiswa = mahasiswaInflater.findViewById<TextInputEditText>(R.id.input_nim_alert)
+            tambahMahasiswaDialog.setTitle("Tambah Mahasiswa")
+            tambahMahasiswaDialog.setView(mahasiswaInflater)
+            tambahMahasiswaDialog.setPositiveButton("Tambah") { dialog, i ->
+                var namaMahasiswa = inputNamaMahasiswa.text.toString()
+                var nimMahasiswa = inputNimMahasiswa.text.toString()
+
+                kelasRef.document(kelas).collection("mahasiswa").document(nimMahasiswa).get()
+                    .addOnSuccessListener {
+                        if (it.exists()) {
+                            Timber.d("Tidak bisa menambah mahasiswa, sudah ada")
+                            Toast.makeText(baseContext, "Tidak bisa menambah mahasiswa, sudah ada", Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            val mahasiswaData = hashMapOf(
+                                "nama" to namaMahasiswa,
+                                "nim" to nimMahasiswa
+                            )
+
+                            val mahasiswaDataCek = hashMapOf(
+                                "nama" to namaMahasiswa,
+                                "nim" to nimMahasiswa,
+                                "cek" to false
+                            )
+                            kelasRef.document(kelas).collection("mahasiswa").document(nimMahasiswa).set(mahasiswaData)
+                                .addOnCompleteListener {
+                                    Timber.d("Tambah mahasiswa berhasil")
+                                    Toast.makeText(baseContext, "Tambah mahasiswa berhasil", Toast.LENGTH_SHORT)
+                                        .show()
+                                } .addOnFailureListener { e ->
+                                    Timber.w(e, "Gagal menambah mahasiswa: ")
+                                    Toast.makeText(baseContext, "Gagal: " + e.localizedMessage, Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+
+                            mahasiswaCekRef.document(nimMahasiswa).set(mahasiswaDataCek)
+                                .addOnCompleteListener {
+                                    Timber.d("Tambah mahasiswa cek berhasil")
+                                } .addOnFailureListener { e ->
+                                    Timber.w(e, "Gagal menambah mahasiswa cek: ")
+                                }
+                        }
+                    } .addOnFailureListener { e ->
+                        Timber.w(e, "Gagal mengambil data mahasiswa")
+                    }
+            }
+            tambahMahasiswaDialog.setNegativeButton("Batal", null)
+            tambahMahasiswaDialog.show()
+        }
+
+
 
         binding.topAppBarDetailTugas.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -96,5 +260,15 @@ class DetailTugasActivity : BaseActivity() {
             }
         }
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        adapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapter.stopListening()
     }
 }

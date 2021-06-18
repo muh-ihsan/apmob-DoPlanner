@@ -64,12 +64,6 @@ open class BaseActivity : AppCompatActivity() {
         startActivity(intentTambahTugas)
     }
 
-    // fungsi untuk memulai activity tambah mahasiswa
-    fun keActivityTambahMahasiswa(packageContext: Context) {
-        val intentTambahMahasiswa = Intent(packageContext, TambahMahasiswaActivity::class.java)
-        startActivity(intentTambahMahasiswa)
-    }
-
     // fungsi untuk memulai activity detail tugas
     fun keActivityDetailTugas(packageContext: Context) {
         val intentDetailTugas = Intent(packageContext, DetailTugasActivity::class.java)

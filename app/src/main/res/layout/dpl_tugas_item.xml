@@ -22,32 +22,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/bt_hapus_tugas_card"
-            android:layout_width="24dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="16dp"
-            android:paddingVertical="8dp"
-            app:srcCompat="@drawable/ic_delete_24"
-            android:tint="@color/PrimaryButtonColor"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <ImageButton
-            android:id="@+id/bt_edit_tugas_card"
-            android:layout_width="24dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:paddingVertical="8dp"
-            app:srcCompat="@drawable/ic_edit_24"
-            android:tint="@color/PrimaryButtonColor"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintEnd_toStartOf="@id/bt_hapus_tugas_card"
-            app:layout_constraintTop_toTopOf="parent"/>
-
         <TextView
             android:id="@+id/tv_matkul_tugas_card"
             android:layout_width="wrap_content"

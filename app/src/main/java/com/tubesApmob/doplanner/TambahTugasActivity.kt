@@ -123,6 +123,33 @@ class TambahTugasActivity : BaseActivity() {
                 Timber.d("Tugas ditambah dengan id:${it.id}")
                 Toast.makeText(baseContext, "Tugas berhasil dibuat", Toast.LENGTH_SHORT)
                     .show()
+
+                // Menambah data mahasiswa ke dalam tugas
+                val kelasRef = db.collection("users").document(user.uid).collection("kelas")
+                val mahasiswaCekRef = tugasRef.document(it.id).collection("mahasiswa")
+                kelasRef.document(kelas).collection("mahasiswa").get()
+                    .addOnSuccessListener { docs ->
+                        Timber.d("Sukses mendapatkan data mahasiswa kelas")
+                        for (doc in docs) {
+                            var namaMahasiswa = doc.get("nama").toString()
+                            var nimMahasiswa = doc.get("nim").toString()
+
+                            val dataMahasiswa = hashMapOf(
+                                "nama" to namaMahasiswa,
+                                "nim" to nimMahasiswa,
+                                "cek" to false
+                            )
+                            mahasiswaCekRef.document(nimMahasiswa).set(dataMahasiswa)
+                                .addOnSuccessListener {
+                                    Timber.d("Sukses menambah mahasiswa ke dalam tugas")
+                                } .addOnFailureListener { e ->
+                                    Timber.w(e, "Gagal menambah mahasiswa ke dalam tugas")
+                                }
+                        }
+                    } .addOnFailureListener { e ->
+                        Timber.w(e, "Gagal mendapatkan data mahasiswa kelas")
+                    }
+
                 finish()
             } .addOnFailureListener { e ->
                 Timber.w(e, "Tugas gagal dibuat: ")
