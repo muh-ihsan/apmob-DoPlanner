@@ -18,12 +18,14 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.tubesApmob.doplanner.databinding.DplTugasDetailBinding
+import org.w3c.dom.Text
 import timber.log.Timber
 
 class MahasiswaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -40,6 +42,14 @@ class DetailTugasActivity : BaseActivity() {
     private lateinit var db: FirebaseFirestore
     private lateinit var user: FirebaseUser
     private lateinit var adapter: FirestoreRecyclerAdapter<DataMahasiswa, MahasiswaViewHolder>
+    private lateinit var textTugas: TextView
+    private lateinit var textMatkul: TextView
+    private lateinit var textKelas: TextView
+    private lateinit var deadlineTugas: TextView
+    private lateinit var deskripsiTugas: String
+    private lateinit var tugasRef: CollectionReference
+    private lateinit var idTugas: String
+    private lateinit var kelas: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,33 +60,15 @@ class DetailTugasActivity : BaseActivity() {
         user = auth.currentUser!!
         db = Firebase.firestore
 
-        val textTugas = binding.tvNamaTugasDetail
-        val textKelas = binding.tvKelasTugasDetail
-        val textMatkul = binding.tvMatkulTugasDetail
-        val deadlineTugas = binding.tvTglDeadlineTugasDetail
-        val idTugas = intent.getStringExtra("idTugasDetail")
-        val tugasRef = db.collection("users").document(user.uid).collection("tugas")
+        textTugas = binding.tvNamaTugasDetail
+        textKelas = binding.tvKelasTugasDetail
+        textMatkul = binding.tvMatkulTugasDetail
+        deadlineTugas = binding.tvTglDeadlineTugasDetail
+        idTugas = intent.getStringExtra("idTugasDetail").toString()
+        tugasRef = db.collection("users").document(user.uid).collection("tugas")
         val kelasRef = db.collection("users").document(user.uid).collection("kelas")
         val mahasiswaCekRef = db.collection("users").document(user.uid).collection("tugas")
             .document(idTugas!!).collection("mahasiswa")
-        var deskripsiTugas: String = ""
-        var kelas: String = ""
-
-        tugasRef.document(idTugas).get().addOnSuccessListener {
-            Timber.d("Sukses ambil data tugas")
-            textTugas.text = it.get("nama").toString()
-            textMatkul.text = it.get("matkul").toString()
-            textKelas.text = it.get("kelas").toString()
-            deadlineTugas.text = it.get("tanggal").toString()
-            deskripsiTugas = it.get("deskripsi").toString()
-        } .addOnFailureListener { e ->
-            Timber.w(e, "Gagal ambil data tugas: ")
-        }
-
-        kelas = textKelas.text.toString()
-        if (kelas.isEmpty()) {
-            Timber.d("Isi kelas kosong")
-        }
 
         // Untuk sinkronisasi data mahasiswa tugas dengan data mahasiswa pada induk
         binding.btSyncTugas.setOnClickListener {
@@ -84,7 +76,6 @@ class DetailTugasActivity : BaseActivity() {
                 .collection("mahasiswa").get().addOnSuccessListener { docs ->
                     Timber.d("Sukses ambil data mahasiswa kelas")
                     for (doc in docs) {
-                        Timber.d("Loop ke $doc dalam ambil data mahasiswa kelas")
                         var namaMahasiswaKelas = doc.get("nama").toString()
                         var nimMahasiswaKelas = doc.get("nim").toString()
                         var dataMahaiswaKelas = hashMapOf(
@@ -146,7 +137,97 @@ class DetailTugasActivity : BaseActivity() {
                 }
 
                 holder.btEditMahasiswa.setOnClickListener {
-                    
+                    Timber.d("Edit di-tap pada ID:$idMahasiswa dan bernama ${holder.nimMahasiswa.text}")
+                    val editMahasiswaDialog = MaterialAlertDialogBuilder(this@DetailTugasActivity)
+                    val mahasiswaInflater = layoutInflater.inflate(R.layout.dpl_alert_mahasiswa, null)
+                    val inputNamaMahasiswa = mahasiswaInflater.findViewById<TextInputEditText>(R.id.input_mahasiswa_alert)
+                    val inputNimMahasiswa = mahasiswaInflater.findViewById<TextInputEditText>(R.id.input_nim_alert)
+
+                    // Untuk mengisi data mahasiswa sebelum edit ke textedit
+                    mahasiswaCekRef.document(idMahasiswa).get().addOnSuccessListener {
+                        Timber.d("Ambil data mahasiswa cek berhasil")
+                        inputNamaMahasiswa.setText(it.get("nama").toString())
+                        inputNimMahasiswa.setText(it.get("nim").toString())
+                    } .addOnFailureListener { e ->
+                        Timber.w(e, "Ambil data mahasiswa gagal")
+                    }
+
+                    editMahasiswaDialog.setTitle("Tambah Mahasiswa")
+                    editMahasiswaDialog.setView(mahasiswaInflater)
+                    editMahasiswaDialog.setPositiveButton("Edit") { dialog, i ->
+                        var namaMahasiswa = inputNamaMahasiswa.text.toString()
+                        var nimMahasiswa = inputNimMahasiswa.text.toString()
+
+                        val dataEdit = hashMapOf(
+                            "nama" to namaMahasiswa,
+                            "nim" to nimMahasiswa
+                        )
+
+                        // Untuk edit mahasiswa
+                        kelasRef.document(kelas).collection("mahasiswa").document(nimMahasiswa).set(dataEdit, SetOptions.merge())
+                            .addOnSuccessListener {
+                                Timber.d("Edit mahasiswa berhasil")
+                                Toast.makeText(baseContext, "Edit mahasiswa berhasil", Toast.LENGTH_SHORT)
+                                    .show()
+                            } .addOnFailureListener { e ->
+                                Timber.w(e, "Gagal edit mahasiswa: ")
+                                Toast.makeText(baseContext, "Gagal edit: " + e.localizedMessage, Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+
+                        // Untuk menghapus data mahasiswa sebelumnya
+                        kelasRef.document(kelas).collection("mahasiswa").document(idMahasiswa).delete()
+                            .addOnSuccessListener {
+                                Timber.d("Hapus untuk mahasiswa sebelumnya berhasil")
+                            } .addOnFailureListener { e ->
+                                Timber.w(e, "Hapus untuk mahasiswa sebelumnya gagal")
+                            }
+
+                        // Untuk edit data mahasiswa
+                        mahasiswaCekRef.document(nimMahasiswa).set(dataEdit, SetOptions.merge())
+                            .addOnCompleteListener {
+                                Timber.d("Edit mahasiswa cek berhasil")
+                            } .addOnFailureListener { e ->
+                                Timber.w(e, "Gagal menambah mahasiswa cek: ")
+                            }
+
+                        // Untuk menghapus data mahasiswa sebelumnya
+                        mahasiswaCekRef.document(idMahasiswa).delete()
+                            .addOnSuccessListener {
+                                Timber.d("Hapus untuk mahasiswa cek sebelumnya berhasil")
+                            } .addOnFailureListener { e ->
+                                Timber.w(e, "Hapus untuk mahasiswa cek sebelumnya gagal")
+                            }
+                    }
+                    editMahasiswaDialog.setNegativeButton("Batal", null)
+                    editMahasiswaDialog.show()
+                }
+
+                holder.btHapusMahasiswa.setOnClickListener {
+                    Timber.d("Hapus di-tap pada ID:$idMahasiswa dan bernama ${holder.nimMahasiswa.text}")
+                    val hapusMahasiswaAlert = MaterialAlertDialogBuilder(this@DetailTugasActivity)
+                    hapusMahasiswaAlert.setMessage("Apakah anda yakin ingin menghapus mahasiswa ini?")
+                    hapusMahasiswaAlert.setPositiveButton("Hapus") { dialog, i ->
+                        kelasRef.document(kelas).collection("mahasiswa").document(idMahasiswa).delete()
+                            .addOnSuccessListener {
+                                Timber.d("Hapus mahasiswa berhasil")
+                                Toast.makeText(baseContext, "Hapus mahasiswa berhasil", Toast.LENGTH_SHORT)
+                                    .show()
+                            } .addOnFailureListener { e ->
+                                Timber.w(e, "Gagal hapus mahasiswa: ")
+                                Toast.makeText(baseContext, "Gagal hapus: " + e.localizedMessage, Toast.LENGTH_LONG)
+                                    .show()
+                            }
+
+                        mahasiswaCekRef.document(idMahasiswa).delete()
+                            .addOnSuccessListener {
+                                Timber.d("Hapus mahasiswa cek berhasil")
+                            } .addOnFailureListener { e ->
+                                Timber.w(e, "Hapus mahasiswa cek gagal")
+                            }
+                    }
+                    hapusMahasiswaAlert.setNegativeButton("Batal", null)
+                    hapusMahasiswaAlert.show()
                 }
             }
 
@@ -266,6 +347,25 @@ class DetailTugasActivity : BaseActivity() {
         super.onStart()
         adapter.startListening()
     }
+
+    override fun onResume() {
+        super.onResume()
+        tugasRef.document(idTugas).get().addOnSuccessListener {
+            Timber.d("Sukses ambil data tugas")
+            textTugas.text = it.get("nama").toString()
+            textMatkul.text = it.get("matkul").toString()
+            textKelas.text = it.get("kelas").toString()
+            deadlineTugas.text = it.get("tanggal").toString()
+            deskripsiTugas = it.get("deskripsi").toString()
+        } .addOnFailureListener { e ->
+            Timber.w(e, "Gagal ambil data tugas: ")
+        }
+        kelas = textKelas.text.toString()
+        if (kelas.isEmpty()) {
+            Timber.d("Isi kelas kosong")
+        }
+    }
+
 
     override fun onStop() {
         super.onStop()
