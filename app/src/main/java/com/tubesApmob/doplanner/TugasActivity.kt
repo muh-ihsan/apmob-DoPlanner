@@ -30,8 +30,6 @@ class TugasViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val matkulText: TextView = itemView.findViewById(R.id.tv_matkul_tugas_card)
     val deadlineText: TextView = itemView.findViewById(R.id.tv_tgl_deadline_tugas_card)
     val kelasText: TextView = itemView.findViewById(R.id.tv_kelas_tugas_card)
-    val btEdit: ImageButton = itemView.findViewById(R.id.bt_edit_tugas_card)
-    val btHapus: ImageButton = itemView.findViewById(R.id.bt_hapus_tugas_card)
 }
 
 class TugasActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -75,33 +73,6 @@ class TugasActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedLis
                         .putExtra("idTugasDetail", tugasID)
                     startActivity(intentDetailTugas)
                 }
-
-                /*holder.btHapus.setOnClickListener {
-                    Timber.d("Hapus di-tap pada ID:$tugasID dan bernama ${holder.matkulText.text}")
-                    val hapusAlert = MaterialAlertDialogBuilder(this@TugasActivity)
-                    hapusAlert.setMessage("Apakah anda yakin ingin menghapus tugas ini?")
-                    hapusAlert.setPositiveButton("Hapus") { dialog, i ->
-                        db.collection("users").document(user.uid).collection("tugas")
-                            .document(tugasID).delete()
-                            .addOnSuccessListener {
-                                Timber.d("Sukses menghapus tugas")
-                                Toast.makeText(baseContext, "Sukses menghapus tugas", Toast.LENGTH_SHORT)
-                                    .show()
-                            } .addOnFailureListener { e ->
-                                Timber.w(e, "Gagal menghapus tugas")
-                                Toast.makeText(baseContext, "Gagal menghapus tugas" + e.localizedMessage,
-                                    Toast.LENGTH_LONG).show()
-                            }
-                    }
-                    hapusAlert.setNegativeButton("Batal", null)
-                    hapusAlert.show()
-                }
-                holder.btEdit.setOnClickListener {
-                    Timber.d("Edit di-tap pada ID:$tugasID dan bernama ${holder.matkulText.text}")
-                    val intentEditTugas = Intent(this@TugasActivity, EditTugasActivity::class.java)
-                        .putExtra("idTugas", tugasID)
-                    startActivity(intentEditTugas)
-                }*/
             }
 
         }
